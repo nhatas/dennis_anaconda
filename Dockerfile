@@ -19,9 +19,10 @@ RUN wget --quiet https://repo.anaconda.com/miniconda/Miniconda3-latest-Linux-x86
   find /opt/conda/ -follow -type f -name '*.js.map' -delete && \
   /opt/conda/bin/conda clean -afy
 
+ENV PATH=/opt/conda/bin
+
 COPY environment.yml /var/tmp/environment.yml
-RUN conda env update -f /var/tmp/environment.yml && \
-  rm -rf /var/tmp/environment.yml
+RUN conda env update -f /var/tmp/environment.yml
 
 COPY /entrypoint.sh /opt/conda/bin/entrypoint.sh
 RUN chmod a+x /opt/conda/bin/entrypoint.sh
